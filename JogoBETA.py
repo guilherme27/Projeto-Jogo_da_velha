@@ -5,11 +5,11 @@ def local(matriz, jogador = ' ', linha = 0, coluna = 0):
     cont = 1
     mudar(matriz, jogador, linha, coluna)
     x = 1
-    print("    [a] [b] [c] ")
+    print("     [a] [b] [c] ")
     for i in range (3):
-        print('', x, '-', matriz[i][0], '|', matriz[i][1], '|', matriz[i][2])
+        print('', x, '- ', matriz[i][0], '|', matriz[i][1], '|', matriz[i][2])
         if cont <= 2:
-            print('    ---+---+---')
+            print('     ---+---+---')
             cont += 1
         x += 1
     x = 1
@@ -18,10 +18,10 @@ def mudar(matriz, jogador = ' ', linha = 0, coluna = 0):
         matriz[linha][coluna] = jogador
 
     else:
+        print(matriz)
         print('Não é possivel colocar nesta posição, escolha outra.')
         time.sleep(1.5)
         global vez,jogadas
-        vez -= 1
         jogadas -= 1
 
 jogo = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
@@ -35,34 +35,17 @@ while True:
     os.system('cls')
     print('\n')
     local(jogo)
+    print(jogo)
     if (vez % 2) == 0:
-        try:
-            jogada = input('\n\nJogador 1 (X): ')
-        except:
-            print('Informe valores posíveis')
-            vez += 1
-            linha = ' '
-            coluna = ' '
+        jogada = input('\n\nJogador 1 (X): ')
         jogada = jogada.lower()
     else:
-        try:
-            jogada = input('\n\nJogador 2 (O): ')
-        except:
-            print('Informe valores posíveis')
-            vez += 1
-            linha = ' '
-            coluna = ' '
+        jogada = input('\n\nJogador 2 (O): ')
         jogada = jogada.lower()
     for i in range(9):
         if posição[i] == jogada:
             vez += 1
             coluna = int(i/3)
-            if coluna == 0:
-                coluna = 0
-            elif coluna == 1:
-                coluna = 1
-            else:
-                coluna = 2
             if i == 0 or i == 3 or i == 6:
                 linha = 0
                 jogadas += 1
@@ -76,7 +59,7 @@ while True:
             erro += 1
         if erro == 9:
             print('Informe uma posição existente\n')
-            vez -= 1
+            jogadas -= 1
             time.sleep(1.5)
             os.system('cls')
 
