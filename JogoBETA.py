@@ -57,10 +57,11 @@ while True:
             erro += 1
         if erro == 9:
             print('Informe uma posição existente\n')
-            vez -= 1
-            jogadas -= 1
+            if vez != 0:
+                vez -= 1
+            if jogadas != 0:
+                jogadas -= 1
             time.sleep(1.5)
-            os.system('cls')
 
     if (vez % 2) == 1:
         try:
