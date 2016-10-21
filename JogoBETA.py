@@ -73,8 +73,7 @@ while True:
             erro += 1
         if erro == 9:
             print('Informe uma posição existente\n')
-            if vez > 0 :
-                vez -= 1
+            vez -= 1
             time.sleep(1.5)
             os.system('cls')
 
