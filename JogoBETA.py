@@ -1,9 +1,8 @@
 import os,time
 
 
-def local(matriz, jogador = ' ', linha = 0, coluna = 0):
+def imprimir(matriz):
     cont = 1
-    mudar(matriz, jogador, linha, coluna)
     x = 1
     print("     [a] [b] [c] ")
     for i in range (3):
@@ -18,10 +17,10 @@ def mudar(matriz, jogador = ' ', linha = 0, coluna = 0):
         matriz[linha][coluna] = jogador
 
     else:
-        print(matriz)
         print('Não é possivel colocar nesta posição, escolha outra.')
         time.sleep(1.5)
         global vez,jogadas
+        vez -= 1
         jogadas -= 1
 
 jogo = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
@@ -34,8 +33,7 @@ while True:
     print('\n')
     os.system('cls')
     print('\n')
-    local(jogo)
-    print(jogo)
+    imprimir(jogo)
     if (vez % 2) == 0:
         jogada = input('\n\nJogador 1 (X): ')
         jogada = jogada.lower()
@@ -59,19 +57,20 @@ while True:
             erro += 1
         if erro == 9:
             print('Informe uma posição existente\n')
+            vez -= 1
             jogadas -= 1
             time.sleep(1.5)
             os.system('cls')
 
     if (vez % 2) == 1:
         try:
-            local(jogo, 'X', linha, coluna)
+            mudar(jogo, 'X', linha, coluna)
         except:
             nada = 0
         erro = 0
     else:
         try:
-            local(jogo, 'O', linha, coluna)
+            mudar(jogo, 'O', linha, coluna)
         except:
             nada = 0
         erro = 0
