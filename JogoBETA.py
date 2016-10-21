@@ -137,6 +137,8 @@ while True:
 print('\n')
 os.system('cls')
 print('\n')
+imprimir(jogo)
+print('\n')
 if vencedor == 'x':
     print('\n Jogador 1 (X) - Venceu!!')
 elif vencedor == 'o':
