@@ -84,12 +84,12 @@ while game_over == 'não':
     os.system('cls')
     while resposta == 'não':
         try:
-            quantidade_jogador = int(input(' 1 - Jogar com 2 jogadores \n 2 - Jogar com a maquina \n 3 - Acessar ranking'))
+            quantidade_jogador = int(input(' 1 - Jogar com 2 jogadores \n 2 - Jogar com a maquina \n 3 - Acessar ranking\n '))
             if quantidade_jogador == 1:
                 time.sleep(1)
                 os.system('cls')
                 try:
-                    quantidade_jogador = int(input(' 1 - Jogar localmente \n 2 - Jogar em rede'))
+                    quantidade_jogador = int(input(' 1 - Jogar localmente \n 2 - Jogar em rede\n '))
                     if quantidade_jogador == 1:
                         from JogoBETA import *
                         resposta = 'sim'
@@ -97,7 +97,7 @@ while game_over == 'não':
                         web()
                         resposta = 'sim'
                 except ValueError:
-                    print('Informe um valor válido')
+                    print('Informe um valor válido\n ')
             elif quantidade_jogador == 2:
                 maquina()
                 resposta = 'sim'
