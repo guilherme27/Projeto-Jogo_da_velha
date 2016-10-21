@@ -5,11 +5,11 @@ def local(matriz, jogador = ' ', linha = 0, coluna = 0):
     cont = 1
     mudar(matriz, jogador, linha, coluna)
     x = 1
-    print("    a   b   c ")
+    print("    [a] [b] [c] ")
     for i in range (3):
-        print('', x, '', matriz[i][0], '|', matriz[i][1], '|', matriz[i][2])
+        print('', x, '-', matriz[i][0], '|', matriz[i][1], '|', matriz[i][2])
         if cont <= 2:
-            print('   ---+---+---')
+            print('    ---+---+---')
             cont += 1
         x += 1
     x = 1
