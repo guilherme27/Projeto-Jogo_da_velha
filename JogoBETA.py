@@ -4,12 +4,14 @@ import os,time
 def local(matriz, jogador = ' ', linha = 0, coluna = 0):
     cont = 1
     mudar(matriz, jogador, linha, coluna)
+    x = 1
     for i in range (3):
-        for j in range (11):
-            print(matriz[i][j], end = '')
+        print('', matriz[i][0], '|', matriz[i][1], '|', matriz[i][2], '           a', x,'| b', x, '| c', x)
         if cont <= 2:
-            print('\n---+---+---')
+            print('---+---+---          -----+-----+-----')
             cont += 1
+        x += 1
+    x = 1
 def mudar(matriz, jogador = ' ', linha = 0, coluna = 0):
     if matriz[linha][coluna] == ' ':
         matriz[linha][coluna] = jogador
@@ -21,7 +23,7 @@ def mudar(matriz, jogador = ' ', linha = 0, coluna = 0):
         vez -= 1
         jogadas -= 1
 
-jogo = [[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' '],[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' '],[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' ']]
+jogo = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 erro = 0
 posição = ['a1','a2','a3','b1','b2','b3','c1','c2','c3']
 vencedor = ' '
@@ -55,11 +57,11 @@ while True:
             vez += 1
             coluna = int(i/3)
             if coluna == 0:
-                coluna = 1
+                coluna = 0
             elif coluna == 1:
-                coluna = 5
+                coluna = 1
             else:
-                coluna = 9
+                coluna = 2
             if i == 0 or i == 3 or i == 6:
                 linha = 0
                 jogadas += 1
@@ -90,56 +92,56 @@ while True:
             nada = 0
         erro = 0
 
-    if jogo[0][1] == jogo[0][5] and jogo[0][5] == jogo[0][9] and jogo[0][1] != ' ':
+    if jogo[0][0] == jogo[0][1] and jogo[0][1] == jogo[0][2] and jogo[0][2] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
         else:
             vencedor = 'o'
             break
-    elif jogo[1][1] == jogo[1][5] and jogo[1][5] == jogo[1][9] and jogo[1][1] != ' ':
+    elif jogo[1][0] == jogo[1][1] and jogo[1][1] == jogo[1][2] and jogo[1][2] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
         else:
             vencedor = 'o'
             break
-    elif jogo[2][1] == jogo[2][5] and jogo[2][5] == jogo[2][9] and jogo[2][1] != ' ':
+    elif jogo[2][0] == jogo[2][1] and jogo[2][1] == jogo[2][2] and jogo[2][2] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
         else:
             vencedor = 'o'
             break
-    elif jogo[0][1] == jogo[1][1] and jogo[1][1] == jogo[2][1] and jogo[0][1] != ' ':
+    elif jogo[0][0] == jogo[1][0] and jogo[1][0] == jogo[2][0] and jogo[2][0] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
         else:
             vencedor = 'o'
             break
-    elif jogo[0][5] == jogo[1][5] and jogo[1][5] == jogo[2][5] and jogo[0][5] != ' ':
+    elif jogo[0][1] == jogo[1][1] and jogo[1][1] == jogo[2][1] and jogo[2][1] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
         else:
             vencedor = 'o'
             break
-    elif jogo[0][9] == jogo[1][9] and jogo[1][9] == jogo[2][9] and jogo[0][9] != ' ':
+    elif jogo[0][2] == jogo[1][2] and jogo[1][2] == jogo[2][2] and jogo[2][2] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
         else:
             vencedor = 'o'
             break
-    elif jogo[0][1] == jogo[1][5] and jogo[1][5] == jogo[2][9] and jogo[0][1] != ' ':
+    elif jogo[0][0] == jogo[1][1] and jogo[1][1] == jogo[2][2] and jogo[2][2] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
         else:
             vencedor = 'o'
             break
-    elif jogo[0][9] == jogo[1][5] and jogo[1][5] == jogo[2][1] and jogo[0][9] != ' ':
+    elif jogo[0][2] == jogo[1][1] and jogo[1][1] == jogo[2][0] and jogo[2][0] != ' ':
         if (vez % 2) == 1:
             vencedor = 'x'
             break
