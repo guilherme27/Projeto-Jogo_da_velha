@@ -1,12 +1,13 @@
+from ia2 import *
 import os,time
-
+from termcolor import *
 
 def imprimir(matriz):
     cont = 1
     x = 1
-    print("     [a] [b] [c] ")
+    print(colored("     [A] [B] [C] ",'green'))
     for i in range (3):
-        print('', x, '- ', matriz[i][0], '|', matriz[i][1], '|', matriz[i][2])
+        print('', colored(str(x) + ' - ','green'), matriz[i][0], '|', matriz[i][1], '|', matriz[i][2])
         if cont <= 2:
             print('     ---+---+---')
             cont += 1
@@ -28,7 +29,13 @@ erro = 0
 posição = ['a1','a2','a3','b1','b2','b3','c1','c2','c3']
 vencedor = ' '
 jogadas = 0
+jogador2 = 'ia'
 vez = 0
+
+def define(jogador):
+    global jogador2
+    jogador2 = jogador
+
 while True:
     print('\n')
     os.system('cls')
@@ -38,8 +45,11 @@ while True:
         jogada = input('\n\nJogador 1 (X): ')
         jogada = jogada.lower()
     else:
-        jogada = input('\n\nJogador 2 (O): ')
-        jogada = jogada.lower()
+        if jogador2 == 'humano':
+            jogada = input('\n\nJogador 2 (O): ')
+            jogada = jogada.lower()
+        elif jogador2 == 'ia':
+            jogada = IA(jogo)
     for i in range(9):
         if posição[i] == jogada:
             vez += 1
@@ -67,13 +77,13 @@ while True:
         try:
             mudar(jogo, 'X', linha, coluna)
         except:
-            nada = 0
+            pass
         erro = 0
     else:
         try:
             mudar(jogo, 'O', linha, coluna)
         except:
-            nada = 0
+            pass
         erro = 0
 
     if jogo[0][0] == jogo[0][1] and jogo[0][1] == jogo[0][2] and jogo[0][2] != ' ':
@@ -146,3 +156,5 @@ elif vencedor == 'o':
     print('\n Jogador 2 (O) - Venceu!!')
 else:
     print('\n Não houve vitória, deu velha!!')
+
+input('Aperte enter pra finalizar!')
