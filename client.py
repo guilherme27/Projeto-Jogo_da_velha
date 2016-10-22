@@ -200,7 +200,7 @@ class Send:
 
 # função esperar - Thread
 def esperar(tcp, send, host='localhost', port=5000):
-    global msg
+    global msg, fim
     destino = (host, port)
     # conecta a um servidor
     tcp.connect(destino)
@@ -216,9 +216,11 @@ def esperar(tcp, send, host='localhost', port=5000):
             jogodavelha()
             if fim == 1:
                 break
-            print("Sua vez! \n")
+            else:
+                print("Sua vez! \n")
             if not msg:
                 break
+
 
 
 if __name__ == '__main__':

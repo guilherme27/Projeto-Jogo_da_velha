@@ -31,6 +31,7 @@ jogadas = 0
 vez = 0
 jogada = " "
 O = " "
+fim = 0
 
 def jogodavelha():
     global jogada, vez, jogadas, erro, linha, coluna, nada, O, msg, fim
@@ -205,7 +206,7 @@ class Send:
 
 # função esperar - Thread
 def esperar(tcp, send, host='', port=5000):
-    global O
+    global O, fim
     origem = (host, port)
     # cria um vínculo
     tcp.bind(origem)
@@ -224,6 +225,8 @@ def esperar(tcp, send, host='', port=5000):
             msg = con.recv(1024)
             O = str(msg, 'utf-8')
             jogodavelha()
+            if fim == 1:
+                break
             print("Sua vez! \n")
             if not msg: break
 
@@ -252,5 +255,3 @@ if __name__ == '__main__':
     processo.join()
     tcp.close()
     exit()
-
-
