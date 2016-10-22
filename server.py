@@ -33,7 +33,7 @@ jogada = " "
 O = " "
 
 def jogodavelha():
-    global jogada, vez, jogadas, erro, linha, coluna, nada, O, msg, vencedor
+    global jogada, vez, jogadas, erro, linha, coluna, nada, O, msg, fim
     while True:
         print('\n')
         os.system('cls')
@@ -102,61 +102,78 @@ def jogodavelha():
         if jogo[0][1] == jogo[0][5] and jogo[0][5] == jogo[0][9] and jogo[0][1] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         elif jogo[1][1] == jogo[1][5] and jogo[1][5] == jogo[1][9] and jogo[1][1] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         elif jogo[2][1] == jogo[2][5] and jogo[2][5] == jogo[2][9] and jogo[2][1] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         elif jogo[0][1] == jogo[1][1] and jogo[1][1] == jogo[2][1] and jogo[0][1] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         elif jogo[0][5] == jogo[1][5] and jogo[1][5] == jogo[2][5] and jogo[0][5] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         elif jogo[0][9] == jogo[1][9] and jogo[1][9] == jogo[2][9] and jogo[0][9] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         elif jogo[0][1] == jogo[1][5] and jogo[1][5] == jogo[2][9] and jogo[0][1] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         elif jogo[0][9] == jogo[1][5] and jogo[1][5] == jogo[2][1] and jogo[0][9] != ' ':
             if (vez % 2) == 1:
                 print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
                 break
             else:
                 print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
                 break
         if jogadas == 9:
             print('\n Não houve vitória, deu velha!!')
+            fim = 1
             break
         break
 
@@ -227,10 +244,9 @@ if __name__ == '__main__':
     msg = " "
     print("Sua vez!")
     while True:
-        send.put(msg)
         msg = input()
+        send.put(msg)
         jogodavelha()
-        send.put("Sua Vez!")
 
 
     processo.join()

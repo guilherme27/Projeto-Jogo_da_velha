@@ -1,6 +1,182 @@
 from socket import socket, AF_INET, SOCK_STREAM
 from threading import Thread
+import os,time
 
+
+def local(matriz, jogador = ' ', linha = 0, coluna = 0):
+    cont = 1
+    mudar(matriz, jogador, linha, coluna)
+    for i in range (3):
+        for j in range (11):
+            print(matriz[i][j], end = '')
+        if cont <= 2:
+            print('\n---+---+---')
+            cont += 1
+    print('\n' * 3)
+def mudar(matriz, jogador = ' ', linha = 0, coluna = 0):
+    if matriz[linha][coluna] == ' ':
+        matriz[linha][coluna] = jogador
+
+    else:
+        print('Não é possivel colocar nesta posição, escolha outra.')
+        time.sleep(1.5)
+        global vez,jogadas
+        vez -= 1
+        jogadas -= 1
+
+jogo = [[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' '],[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' '],[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' ']]
+erro = 0
+posição = ['a1','a2','a3','b1','b2','b3','c1','c2','c3']
+jogadas = 0
+vez = 0
+jogada = " "
+O = " "
+msg = " "
+fim = 0
+def jogodavelha():
+    global jogada, vez, jogadas, erro, linha, coluna, nada, O, msg, fim
+    while True:
+        print('\n')
+        os.system('cls')
+        print('\n')
+        local(jogo)
+        if (vez % 2) == 0 and msg != " ":
+            try:
+                jogada = msg
+            except:
+                print('Informe valores posíveis')
+                vez += 1
+                linha = ' '
+                coluna = ' '
+            jogada = jogada.lower()
+            print(jogada)
+            msg = " "
+        elif O != " ":
+            try:
+                jogada = O
+            except:
+                print('Informe valores posíveis')
+                vez += 1
+                linha = ' '
+                coluna = ' '
+            jogada = jogada.lower()
+            O = " "
+        for i in range(9):
+            if posição[i] == jogada:
+                vez += 1
+                coluna = int(i/3)
+                if coluna == 0:
+                    coluna = 1
+                elif coluna == 1:
+                    coluna = 5
+                else:
+                    coluna = 9
+                if i == 0 or i == 3 or i == 6:
+                    linha = 0
+                    jogadas += 1
+                elif i == 1 or i == 4 or i == 7:
+                    linha = 1
+                    jogadas += 1
+                else:
+                    linha = 2
+                    jogadas += 1
+            else:
+                erro += 1
+            if erro == 9:
+                print('Informe uma posição existente\n')
+                if vez > 0 :
+                    vez -= 1
+                time.sleep(1.5)
+                os.system('cls')
+        if (vez % 2) == 1:
+            try:
+                local(jogo, 'X', linha, coluna)
+            except:
+                nada = 0
+            erro = 0
+        else:
+            try:
+                local(jogo, 'O', linha, coluna)
+            except:
+                nada = 0
+            erro = 0
+        if jogo[0][1] == jogo[0][5] and jogo[0][5] == jogo[0][9] and jogo[0][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        elif jogo[1][1] == jogo[1][5] and jogo[1][5] == jogo[1][9] and jogo[1][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        elif jogo[2][1] == jogo[2][5] and jogo[2][5] == jogo[2][9] and jogo[2][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        elif jogo[0][1] == jogo[1][1] and jogo[1][1] == jogo[2][1] and jogo[0][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        elif jogo[0][5] == jogo[1][5] and jogo[1][5] == jogo[2][5] and jogo[0][5] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        elif jogo[0][9] == jogo[1][9] and jogo[1][9] == jogo[2][9] and jogo[0][9] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        elif jogo[0][1] == jogo[1][5] and jogo[1][5] == jogo[2][9] and jogo[0][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        elif jogo[0][9] == jogo[1][5] and jogo[1][5] == jogo[2][1] and jogo[0][9] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                fim = 1
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                fim = 1
+                break
+        if jogadas == 9:
+            print('\n Não houve vitória, deu velha!!')
+            fim = 1
+            break
+        break
 
 # classe para manipular o socket
 class Send:
@@ -24,6 +200,7 @@ class Send:
 
 # função esperar - Thread
 def esperar(tcp, send, host='localhost', port=5000):
+    global msg
     destino = (host, port)
     # conecta a um servidor
     tcp.connect(destino)
@@ -35,8 +212,13 @@ def esperar(tcp, send, host='localhost', port=5000):
         while send.loop():
             # aceita uma mensagem
             msg = tcp.recv(1024)
-            if not msg: break
-            print(str(msg, 'utf-8'))
+            msg = str(msg, 'utf-8')
+            jogodavelha()
+            if fim == 1:
+                break
+            print("Sua vez! \n")
+            if not msg:
+                break
 
 
 if __name__ == '__main__':
@@ -54,10 +236,11 @@ if __name__ == '__main__':
     processo.start()
     print('')
 
-    msg = input()
+
     while True:
-        send.put(msg)
-        msg = input()
+        O = input()
+        send.put(O)
+        jogodavelha()
 
     processo.join()
     tcp.close()
