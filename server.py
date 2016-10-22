@@ -12,6 +12,7 @@ def local(matriz, jogador = ' ', linha = 0, coluna = 0):
         if cont <= 2:
             print('\n---+---+---')
             cont += 1
+    print('\n' * 3)
 def mudar(matriz, jogador = ' ', linha = 0, coluna = 0):
     if matriz[linha][coluna] == ' ':
         matriz[linha][coluna] = jogador
@@ -26,14 +27,13 @@ def mudar(matriz, jogador = ' ', linha = 0, coluna = 0):
 jogo = [[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' '],[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' '],[' ',' ',' ','|',' ',' ',' ','|',' ',' ',' ']]
 erro = 0
 posição = ['a1','a2','a3','b1','b2','b3','c1','c2','c3']
-vencedor = ' '
 jogadas = 0
 vez = 0
 jogada = " "
 O = " "
 
 def jogodavelha():
-    global jogada, vez, jogadas, erro, linha, coluna, nada, O, msg
+    global jogada, vez, jogadas, erro, linha, coluna, nada, O, msg, vencedor
     while True:
         print('\n')
         os.system('cls')
@@ -99,8 +99,66 @@ def jogodavelha():
             except:
                 nada = 0
             erro = 0
+        if jogo[0][1] == jogo[0][5] and jogo[0][5] == jogo[0][9] and jogo[0][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        elif jogo[1][1] == jogo[1][5] and jogo[1][5] == jogo[1][9] and jogo[1][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        elif jogo[2][1] == jogo[2][5] and jogo[2][5] == jogo[2][9] and jogo[2][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        elif jogo[0][1] == jogo[1][1] and jogo[1][1] == jogo[2][1] and jogo[0][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        elif jogo[0][5] == jogo[1][5] and jogo[1][5] == jogo[2][5] and jogo[0][5] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        elif jogo[0][9] == jogo[1][9] and jogo[1][9] == jogo[2][9] and jogo[0][9] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        elif jogo[0][1] == jogo[1][5] and jogo[1][5] == jogo[2][9] and jogo[0][1] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        elif jogo[0][9] == jogo[1][5] and jogo[1][5] == jogo[2][1] and jogo[0][9] != ' ':
+            if (vez % 2) == 1:
+                print('\n Jogador 1 (X) - Venceu!!')
+                break
+            else:
+                print('\n Jogador 2 (O) - Venceu!!')
+                break
+        if jogadas == 9:
+            print('\n Não houve vitória, deu velha!!')
+            break
         break
-
 
 
 
@@ -118,7 +176,7 @@ class Send:
     def put(self, msg):
         self.__msg = msg
         if self.con != None:
-            # envia um mensagem atravez de uma conexão socket
+            # envia um mensagem através de uma conexão socket
             self.con.send(str.encode(self.__msg))
 
     def get(self):
@@ -132,7 +190,7 @@ class Send:
 def esperar(tcp, send, host='', port=5000):
     global O
     origem = (host, port)
-    # cria um vinculo
+    # cria um vínculo
     tcp.bind(origem)
     # deixa em espera
     tcp.listen(1)
@@ -149,6 +207,7 @@ def esperar(tcp, send, host='', port=5000):
             msg = con.recv(1024)
             O = str(msg, 'utf-8')
             jogodavelha()
+            print("Sua vez! \n")
             if not msg: break
 
 
@@ -162,14 +221,16 @@ if __name__ == '__main__':
     processo = Thread(target=esperar, args=(tcp, send))
     processo.start()
 
-    print('Iniciando o servidor de chat!')
+    print('Iniciando o jogo da velha!')
     print('Aguarde alguém conectar!')
 
-    msg = input()
+    msg = " "
+    print("Sua vez!")
     while True:
         send.put(msg)
         msg = input()
         jogodavelha()
+        send.put("Sua Vez!")
 
 
     processo.join()
