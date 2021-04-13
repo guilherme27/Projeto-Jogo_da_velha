@@ -2,11 +2,10 @@
 
 
 Projeto jogo da velha construido por:
-Alfredo Rodrigo - IA (Inteligência Artificial)
+Alfredo Rodrigo - IA (InteligÃªncia Artificial)
 Bryan Khelven - WEB
-Guilherme Pereira - Main/Jogo/Junção de tudo
-Salomão - Ajuda na IA
+Guilherme Pereira - Main/Jogo/JunÃ§Ã£o de tudo
 
 
 
-Projeto desenvolvido para Windowns em Python 3.5 com colaboração em GIT para o PEM (Projeto de Excelência em Microeletronica) da 1ª turma.
+Projeto desenvolvido para Windowns em Python 3.5 com colaboraÃ§Ã£o em GIT para o PEM (Projeto de ExcelÃªncia em Microeletronica) da 1Âª turma.
